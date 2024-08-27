@@ -11,7 +11,7 @@ namespace eTickets.Models.Domain
 
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Price { get; set; }
+        public double Price { get; set; }
         public string? PosterURL { get; set; }
         public string ImageURL { get; set; }
         public DateTime StartDate { get; set; }
