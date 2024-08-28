@@ -29,37 +29,45 @@
 								<a class=" card-title " href="#"><i class="bg bi-pencil-square text-white "></i></a>
 							</div>
 						</div>
-						<img class="card-img-top" src="@movie.ImageURL" alt="@movie.Name" style="height:200px">
-						<div class="card-body">
-							<p class="card-text truncate-2-lines">@movie.Description</p>
-							<p class="card-text">
-								<b>Cinema</b>
-								@* <ul> *@
-									@foreach (var item in movie.CinemasMovies)
-									{
-										@* <li>@item.Cinema.Name</li> *@
-									@item.Cinema.Name
-									}
-								@* </ul> *@
+						<div class="container">
 
-							</p>
-							<p class="card-text"><b>Category</b> <span class="badge bg-info"> @movie.MovieCategory</p>
-							<p class="card-text"><b>Start Date</b> @movie.StartDate.ToShortDateString()</p>
-							<p class="card-text"><b>End Date</b> @movie.EndDate.ToShortDateString()</p>
-							<p class="card-text"><b>Status: </b>
-								@if(DateTime.Now >= movie.StartDate && DateTime.Now <= movie.EndDate)
-								{
-									<span class="badge bg-success">AVAILABLE</span>
-								}
-								else
-								{
-									<span class="badge bg-primary">UPCOMING</span>
-								}
-							</p>
+							<div class="row">
+								<div class="col-6">
+									<img class="card-img-top" src="@movie.ImageURL" alt="@movie.Name" style="height:95%;width:100%;margin:10px auto">
+								</div>
+								<div class="card-body col-6">
+									<p class="card-text truncate-2-lines">@movie.Description</p>
+									<p class="card-text">
+										<b>Cinema</b>
+										<ul>
+										@foreach (var item in movie.CinemasMovies)
+										{
+											<li>@item.Cinema.Name</li>
+											@* @item.Cinema.Name  *@
+										}
+										</ul>
 
+									</p>
+									<p class="card-text"><b>Category</b> <span class="badge bg-info"> @movie.MovieCategory</p>
+									<p class="card-text"><b>Start Date</b> @movie.StartDate.ToShortDateString()</p>
+									<p class="card-text"><b>End Date</b> @movie.EndDate.ToShortDateString()</p>
+									<p class="card-text">
+										<b>Status: </b>
+										@if (DateTime.Now >= movie.StartDate && DateTime.Now <= movie.EndDate)
+										{
+											<span class="badge bg-success">AVAILABLE</span>
+										}
+										else
+										{
+											<span class="badge bg-primary">UPCOMING</span>
+										}
+									</p>
+
+								</div>
+							</div>
 						</div>
 						<div class="card-footer d-flex justify-content-between">
-							<a href="#" class="btn btn-success text-white"> <i class="bi bi-eye-fill"></i> Add to Cart (@movie.Price)</a>
+							<a href="#" class="btn btn-success text-white"> <i class="bi bi-eye-fill"></i> Add to Cart ($@movie.Price)</a>
 							<a href="#" class="btn btn-outline-primary "> <i class="bi bi-eye-fill"></i> Show Details</a>
 						</div>
 					</div>
