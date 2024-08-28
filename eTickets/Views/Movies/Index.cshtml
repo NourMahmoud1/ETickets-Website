@@ -1,0 +1,85 @@
+﻿@model IEnumerable<eTickets.Models.Domain.Movie>
+
+@{
+	ViewData["Title"] = "List Of Movies";
+}
+
+<div class="card-columns">
+
+	@{
+		ViewData["Title"] = "List Of Movies";
+	}
+
+	@{
+		var movies = Model.ToList();
+		var rowCount = (int)Math.Ceiling((double)movies.Count / 3);
+	}
+
+	@for (int i = 0; i < rowCount; i++)
+	{
+		<div class="row">
+			@for (int j = i * 3; j < Math.Min((i + 1) * 3, movies.Count); j++)
+			{
+				var movie = movies[j];
+				<div class="col-md-4">
+					<div class="card mb-3 card-shadow" style="">
+						<div class="card-header txt-white bg-info">
+							<div class="card-text d-flex justify-content-between">
+								<h5 class="card-title text-white fw-bold">@movie.Name</h5>
+								<a class=" card-title " href="#"><i class="bg bi-pencil-square text-white "></i></a>
+							</div>
+						</div>
+						<img class="card-img-top" src="@movie.ImageURL" alt="@movie.Name" style="height:200px">
+						<div class="card-body">
+							<p class="card-text truncate-2-lines">@movie.Description</p>
+							<p class="card-text">
+								<b>Cinema</b>
+								@* <ul> *@
+									@foreach (var item in movie.CinemasMovies)
+									{
+										@* <li>@item.Cinema.Name</li> *@
+									@item.Cinema.Name
+									}
+								@* </ul> *@
+
+							</p>
+							<p class="card-text"><b>Category</b> <span class="badge bg-info"> @movie.MovieCategory</p>
+							<p class="card-text"><b>Start Date</b> @movie.StartDate.ToShortDateString()</p>
+							<p class="card-text"><b>End Date</b> @movie.EndDate.ToShortDateString()</p>
+							<p class="card-text"><b>Status: </b>
+								@if(DateTime.Now >= movie.StartDate && DateTime.Now <= movie.EndDate)
+								{
+									<span class="badge bg-success">AVAILABLE</span>
+								}
+								else
+								{
+									<span class="badge bg-primary">UPCOMING</span>
+								}
+							</p>
+
+						</div>
+						<div class="card-footer d-flex justify-content-between">
+							<a href="#" class="btn btn-success text-white"> <i class="bi bi-eye-fill"></i> Add to Cart (@movie.Price)</a>
+							<a href="#" class="btn btn-outline-primary "> <i class="bi bi-eye-fill"></i> Show Details</a>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	}
+
+</div>
+
+<script>
+	$(document).ready(function () {
+		$(".card-shadow").hover(
+			function () {
+				$(this).addClass('shadow').css('cursor', 'pointer');
+			}, function () {
+				$(this).removeClass('shadow');
+			}
+		);
+	});
+
+
+</script>

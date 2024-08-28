@@ -6,8 +6,11 @@ namespace eTickets.Models.Domain
     {
         [Key]
         public Guid Id { get; set; }
+        [Display(Name = "Cinema Name")]
         public string Name { get; set; }
+        [Display(Name = "Cinema Description")]
         public string Description { get; set; }
+		[Display(Name = "Cinema Logo")]
         public string Logo { get; set; }
         //Relationships
         //movies
