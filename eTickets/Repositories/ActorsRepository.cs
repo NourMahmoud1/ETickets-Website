@@ -22,5 +22,11 @@ namespace eTickets.Repositories
 			throw new NotImplementedException();
 		}
 
+		public async Task AddAsync(Actor actor)
+		{
+			await _context.Actors.AddAsync(actor);
+			await _context.SaveChangesAsync();
+			
+		}
 	}
 }

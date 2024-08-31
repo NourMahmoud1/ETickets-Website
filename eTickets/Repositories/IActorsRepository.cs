@@ -6,6 +6,8 @@ namespace eTickets.Repositories
 	{
 		Task<IEnumerable<Actor>> GetActorsAsync();
 		Actor GetActorById(int id);
+		//add actorasinc
+		Task AddAsync(Actor actor);
 
 	}
 }

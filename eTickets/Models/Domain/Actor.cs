@@ -8,11 +8,16 @@ namespace eTickets.Models.Domain
         [Key]
         public Guid Id {  get; set; }
         [Display(Name = "Full Name")]
-        public string FullName { get; set; }
+		[Required(ErrorMessage = "Name is Required")]
+		[StringLength(100, MinimumLength = 2, ErrorMessage = "Full Name must be between 2 and 100 characters.")]
+		public string FullName { get; set; }
         [Display(Name = "Profile Picture")]
+        [Required(ErrorMessage = "Profile Picture is Required")]
         public string ProfilePictureURL { get; set; }
         [Display(Name = "Biography")]
-        public string Bio { get; set; }
+		[Required(ErrorMessage = "Bio is Required")]
+		[StringLength(1000, MinimumLength = 10, ErrorMessage = "Bio must be between 10 and 1000 characters.")]
+		public string Bio { get; set; }
         //Relationships
         public ICollection<Actor_Movie> ActorsMovies { get; set; }
 
