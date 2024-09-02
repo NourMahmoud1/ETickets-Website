@@ -1,40 +1,41 @@
-﻿@model eTickets.Models.View.AddActorRequest
+﻿@model eTickets.Models.View.AddCinemaRequest
+
 @{
-	ViewData["Title"] = "Create Actor";
+	ViewData["Title"] = "Create Cinema";
 }
 <div class="row text">
 	<div class="col-md-8 offset-2">
 		<p>
-			<h1>Add New Actor</h1>
+			<h1>Add New Producer</h1>
 		</p>
 
 		<div class="col-md-8 offset-2">
 			<form asp-action="Create" method="post">
 				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 				<div class="mb-3 form-group">
-					<label class="form-label">Featured Image Upload</label>
-					<input type="file" class="form-control" id="featuredImageUpload" />
+					<label class="form-label">Upload Image</label>
+					<input type="file" class="form-control mb-1" id="featuredImageUpload" />
 					<img src="" id="featuredImageDisplay" style="display:none;width:200px" />
-					<span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
+					<span asp-validation-for="Logo" class="text-danger"></span>
 				</div>
-				<div class="mb-3 form-group">
+				<div class="mb-3 form-group ">
 					@* <label class="form-label">Featured Image URL</label> *@
-					<input type="text" hidden readonly class="form-control" id="featuredImageUrl" asp-for="ProfilePictureURL" />
+					<input type="text" readonly class="form-control" id="featuredImageUrl" asp-for="Logo" hidden/>
 				</div>
 				<div class="form-group mb-3">
-					<label asp-for="FullName" class="control-label mb-1"></label>
-					<input asp-for="FullName" class="form-control" />
-					<span asp-validation-for="FullName" class="text-danger"></span>
+					<label asp-for="Name" class="control-label mb-1"></label>
+					<input asp-for="Name" class="form-control" />
+					<span asp-validation-for="Name" class="text-danger"></span>
 				</div>
 				<div class="form-group mb-3">
-					<label asp-for="Bio" class="control-label mb-1"></label>
+					<label asp-for="Description" class="control-label mb-1"></label>
 					@* <input asp-for="Bio" class="form-control" /> *@
-					<textarea asp-for="Bio" class="form-control" id="bio"></textarea>
-					<span asp-validation-for="Bio" class="text-danger"></span>
+					<textarea asp-for="Description" class="form-control" id="bio"></textarea>
+					<span asp-validation-for="Description" class="text-danger"></span>
 				</div>
 				<div class="form-group">
 					<input type="submit" value="Create" class="btn btn-outline-success float-end" />
-					<a class="btn btn-outline-secondary" asp-action="Index" asp-controller="Actors">Show All</a>
+					<a class="btn btn-outline-secondary" asp-action="Index" asp-controller="Cinemas">Show All</a>
 				</div>
 			</form>
 		</div>

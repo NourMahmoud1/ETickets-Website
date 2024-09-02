@@ -1,25 +1,26 @@
-﻿@model eTickets.Models.View.AddActorRequest
+﻿@model eTickets.Models.View.AddProducerRequest
+
 @{
-	ViewData["Title"] = "Create Actor";
+	ViewData["Title"] = "Create Producer";
 }
 <div class="row text">
 	<div class="col-md-8 offset-2">
 		<p>
-			<h1>Add New Actor</h1>
+			<h1>Add New Producer</h1>
 		</p>
 
 		<div class="col-md-8 offset-2">
 			<form asp-action="Create" method="post">
 				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 				<div class="mb-3 form-group">
-					<label class="form-label">Featured Image Upload</label>
+					<label class="form-label">Upload Image</label>
 					<input type="file" class="form-control" id="featuredImageUpload" />
 					<img src="" id="featuredImageDisplay" style="display:none;width:200px" />
 					<span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
 				</div>
 				<div class="mb-3 form-group">
-					@* <label class="form-label">Featured Image URL</label> *@
-					<input type="text" hidden readonly class="form-control" id="featuredImageUrl" asp-for="ProfilePictureURL" />
+					<label class="form-label">Featured Image URL</label>
+					<input type="text" readonly hidden class="form-control" id="featuredImageUrl" asp-for="ProfilePictureURL" />
 				</div>
 				<div class="form-group mb-3">
 					<label asp-for="FullName" class="control-label mb-1"></label>
@@ -34,7 +35,7 @@
 				</div>
 				<div class="form-group">
 					<input type="submit" value="Create" class="btn btn-outline-success float-end" />
-					<a class="btn btn-outline-secondary" asp-action="Index" asp-controller="Actors">Show All</a>
+					<a class="btn btn-outline-secondary" asp-action="Index" asp-controller="Producers">Show All</a>
 				</div>
 			</form>
 		</div>

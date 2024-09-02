@@ -30,6 +30,8 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 // Add dependency injection
 builder.Services.AddScoped<IActorsRepository, ActorsRepository>();
+builder.Services.AddScoped<IProducersRepository, ProducersRepository>();
+builder.Services.AddScoped<ICinemasRepository, CinemasRepository>();
 builder.Services.AddScoped<IImageRepository, CloudinaryImageRepository>();
 
 var app = builder.Build();
