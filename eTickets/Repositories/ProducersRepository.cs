@@ -24,10 +24,36 @@ namespace eTickets.Repositories
 			await context.SaveChangesAsync();
 		}
 
-		public Task<Producer> GetProducerByIdAsync(Guid id)
+		public async Task<Producer> GetProducerByIdAsync(Guid id)
 		{
-			throw new NotImplementedException();
-		}
+            var result = await context.Producers.FirstOrDefaultAsync(x => x.Id == id);
+            return result;
+        }
 
-	}
+        public async Task<Producer?> UpdateAsync(Producer producer)
+        {
+            var existingactor = await context.Producers.FindAsync(producer.Id);
+            if (existingactor != null)
+            {
+                existingactor.FullName = producer.FullName;
+                existingactor.Bio = producer.Bio;
+                existingactor.ProfilePictureURL = producer.ProfilePictureURL;
+                await context.SaveChangesAsync();
+                return existingactor;
+            }
+            return null;
+        }
+
+        public async Task<Producer?> DeleteAsync(Guid id)
+        {
+            var existingProducer = await context.Producers.FindAsync(id);
+            if (existingProducer != null)
+            {
+                context.Producers.Remove(existingProducer);
+                await context.SaveChangesAsync();
+                return existingProducer;
+            }
+            return null;
+        }
+    }
 }

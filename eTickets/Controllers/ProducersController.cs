@@ -43,6 +43,56 @@ namespace eTickets.Controllers
 			await _producersRepository.AddAsync(producer);
 			return RedirectToAction(nameof(Index));
 		}
+		[HttpGet]
+		public async Task<IActionResult> Edit(Guid id)
+		{
+			var producer = await _producersRepository.GetProducerByIdAsync(id);
+			if (producer == null)
+			{
+				return View(null);
+			}
+			var editProducerRequest = new EditProducerRequest
+			{
+				Id = producer.Id,
+				FullName = producer.FullName,
+				ProfilePictureURL = producer.ProfilePictureURL,
+				Bio = producer.Bio
+			};
+			return View(editProducerRequest);
+		}
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditProducerRequest editProducerRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(editProducerRequest);
+            }
+            var producer = new Producer
+            {
+                Id = editProducerRequest.Id,
+                FullName = editProducerRequest.FullName,
+                Bio = editProducerRequest.Bio,
+                ProfilePictureURL = editProducerRequest.ProfilePictureURL
+            };
+            var updatedProducer = await _producersRepository.UpdateAsync(producer);
+            if (updatedProducer != null)
+            {
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Edit", new { id = editProducerRequest.Id });
 
-	}
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(EditProducerRequest editProducerRequest)
+        {
+            var deletedProducer = await _producersRepository.DeleteAsync(editProducerRequest.Id);
+            if (deletedProducer != null)
+            {
+                //Show Message Inidicating The Tag Has Been Deleted
+                return RedirectToAction("Index");
+            }
+            //Show Message Inidicating The Tag Has Not Been Deleted
+            return View("Edit", new { id = editProducerRequest.Id });
+        }
+    }
 }

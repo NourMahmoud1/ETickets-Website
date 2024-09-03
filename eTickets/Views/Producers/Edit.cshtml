@@ -1,0 +1,103 @@
+﻿@model eTickets.Models.View.EditProducerRequest
+@{
+    ViewData["Title"] = "Edit Producer";
+}
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>Welcome Admin, Edit an existing Producer</h1>
+    </div>
+</div>
+
+<div class="container py-5">
+    @if (Model != null)
+    {
+        <form method="post">
+            <div class="mb-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <label class="form-label">Id</label>
+                <input type="text" class="form-control" id="id" asp-for="Id" readonly />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="fullName" asp-for="FullName" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Bio</label>
+                <textarea class="form-control" id="bio" asp-for="Bio"></textarea>
+                <span asp-validation-for="Bio" class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Featured Image Upload</label>
+                <input type="file" class="form-control" id="featuredImageUpload" />
+                @if (Model.ProfilePictureURL != null)
+                {
+                    <img src="@Model.ProfilePictureURL" id="featuredImageDisplay" style="display:block;margin-top:5px;width:200px;height:200px" />
+                }
+                <img src="" id="featuredImageDisplay" style="display:none;width:200px" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Featured Image URL</label>
+                <input type="text" class="form-control" id="featuredImageUrl" asp-for="ProfilePictureURL" />
+                <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
+
+            </div>
+
+
+            <div class="mb-3 d-flex">
+                <button type="submit" class="btn btn-dark">
+                    Update
+                </button>
+                <button type="submit" class="btn btn-danger ms-3"
+                        asp-area="" asp-controller="Producers" asp-action="Delete">
+                    Delete
+                </button>
+            </div>
+        </form>
+
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            Producer not found
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        var editor = new FroalaEditor('#bio', {
+            imageUploadURL: '/api/images',
+        });
+        const featuredUploadElement = document.getElementById('featuredImageUpload');
+        const featuredImageUrlElement = document.getElementById('featuredImageUrl');
+        const featuredImageDisplayElement = document.getElementById('featuredImageDisplay')
+
+        async function uploadFeaturedImage(e) {
+            console.log(e.target.files[0]);
+            let data = new FormData();
+            data.append('file', e.target.files[0]);
+
+            await fetch('/api/images', {
+                method: 'POST',
+                headers: {
+                    'Accept': '*/*',
+                },
+                body: data
+            }).then(response => response.json())
+                .then(result => {
+                    featuredImageUrlElement.value = result.link;
+                    featuredImageDisplayElement.src = result.link;
+                    featuredImageDisplayElement.style.display = 'block';
+                });
+        }
+
+        featuredUploadElement.addEventListener('change', uploadFeaturedImage);
+    </script>
+    
+}

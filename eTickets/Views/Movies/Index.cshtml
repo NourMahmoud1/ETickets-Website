@@ -33,7 +33,7 @@
 
 							<div class="row">
 								<div class="col-6">
-									<img class="card-img-top" src="@movie.ImageURL" alt="@movie.Name" style="height:95%;width:100%;margin:10px auto">
+									<img class="card-img-top rounded" src="@movie.ImageURL" alt="@movie.Name" style="height:95%;width:100%;margin:10px auto">
 								</div>
 								<div class="card-body col-6">
 									<p class="card-text truncate-2-lines">@movie.Description</p>
@@ -82,9 +82,9 @@
 	$(document).ready(function () {
 		$(".card-shadow").hover(
 			function () {
-				$(this).addClass('shadow-lg').css('cursor', 'pointer');
+				$(this).addClass('shadow-lg').css('cursor', 'pointer').css('margin','-3px');
 			}, function () {
-				$(this).removeClass('shadow-lg');
+				$(this).removeClass('shadow-lg').css('cursor', 'default').css('margin','0px');
 			}
 		);
 	});
