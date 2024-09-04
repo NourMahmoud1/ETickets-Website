@@ -96,5 +96,15 @@ namespace eTickets.Controllers
 			await moviesRepository.AddAsync(movie);
             return RedirectToAction(nameof(Index));
         }
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var movie = await moviesRepository.GetMovieById(id);
+            if (movie == null)
+            {
+                return View(null);
+            }
+            return View(movie);
+        }
     }
 }

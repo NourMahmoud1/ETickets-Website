@@ -1,5 +1,6 @@
 ﻿@model eTickets.Models.View.AddMovieRequest
 @{
+    ViewData["Title"] = "Create Movie";
 }
 <p>
     <h1>Add New Movie</h1>
@@ -7,26 +8,38 @@
 
 <div class="container py-5">
     <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
         <div class="mb-3">
             <label class="form-label">Name</label>
             <input type="text" class="form-control" id="name" asp-for="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+
         </div>
         <div class="mb-3">
             <label class="form-label">Description</label>
             <textarea class="form-control" id="description" asp-for="Description"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+
         </div>
 
         <div class="mb-3">
             <label class="form-label">Start Date</label>
             <input type="date" class="form-control" id="startDate" asp-for="StartDate" />
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+
         </div>
         <div class="mb-3">
             <label class="form-label">End Date</label>
             <input type="date" class="form-control" id="endDate" asp-for="EndDate" />
+            <span asp-validation-for="EndDate" class="text-danger"></span>
+
         </div>
         <div class="mb-3">
             <label class="form-label">Price</label>
             <input type="number" class="form-control" id="price" asp-for="Price" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+
         </div>
         <div class="mb-3">
             <label class="form-label">Featured Image Upload</label>
@@ -36,6 +49,8 @@
         <div class="mb-3">
             <label class="form-label">Featured Image URL</label>
             <input type="text" class="form-control" id="featuredImageUrl" asp-for="ImageURL" />
+            <span asp-validation-for="ImageURL" class="text-danger"></span>
+
         </div>
         
         <div class="mb-3">

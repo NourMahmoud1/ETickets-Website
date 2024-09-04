@@ -90,10 +90,8 @@ namespace eTickets.Controllers
             var deletedActor = await _actorsRepository.DeleteAsync(editActorRequest.Id);
             if (deletedActor != null)
             {
-                //Show Message Inidicating The Tag Has Been Deleted
                 return RedirectToAction("Index");
             }
-            //Show Message Inidicating The Tag Has Not Been Deleted
             return View("Edit", new { id = editActorRequest.Id });
         }
     }

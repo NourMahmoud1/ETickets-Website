@@ -32,9 +32,14 @@ namespace eTickets.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Movie> GetMovieById(Guid id)
+        public async Task<Movie> GetMovieById(Guid id)
         {
-            throw new NotImplementedException();
+            var result = await context.Movies.Include(a => a.ActorsMovies).ThenInclude(a => a.Actor)
+                .Include(m => m.CinemasMovies)
+                .ThenInclude(m => m.Cinema).FirstOrDefaultAsync(x => x.Id == id);
+
+            //var result = await context.Movies.FirstOrDefaultAsync(x => x.Id == id);
+            return result;
         }
 
 

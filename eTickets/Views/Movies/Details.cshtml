@@ -1,0 +1,96 @@
+﻿@model eTickets.Models.Domain.Movie
+
+@{
+	ViewData["Title"] = " Details";
+}
+
+@if (Model != null)
+{
+	<div class="col-md-8" style="margin:auto auto">
+		<div class="card mb-3 card-shadow" style="">
+			<div class="card-header txt-white bg-info">
+				<div class="card-text d-flex justify-content-between">
+					<h5 class="card-title text-white fw-bold">@Model.Name Details</h5>
+					<a class=" card-title " href="#"><i class="bg bi-pencil-square text-white "></i></a>
+				</div>
+			</div>
+			<div class="container ">
+
+				<div class="row ">
+					<div class="col-md-6 col-sm-12">
+						<img class="card-img-top rounded" src="@Model.ImageURL" alt="@Model.Name" style="width:100%;margin:10px auto">
+					</div>
+					<div class="card-body col-6">
+						<p class="card-text "> <b>@Model.Name</b></p>
+						<b>Description: </b>
+						<p class="card-text "> <span>@Html.Raw(Model.Description)</p>
+						<p class="card-text">
+							<b>Cinema</b>
+							<ul>
+								@foreach (var item in Model.CinemasMovies)
+								{
+									<li>@item.Cinema.Name</li>
+									@* @item.Cinema.Name  *@
+								}
+							</ul>
+
+						</p>
+						<p class="card-text"><b>Category</b> <span class="badge bg-info"> @Model.MovieCategory</p>
+						<p class="card-text"><b>Start Date</b> @Model.StartDate.ToShortDateString()</p>
+						<p class="card-text"><b>End Date</b> @Model.EndDate.ToShortDateString()</p>
+						<p class="card-text">
+							<b>Status: </b>
+							@if (DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate)
+							{
+								<span class="badge bg-success">AVAILABLE</span>
+							}
+							else if (DateTime.Now > Model.EndDate)
+							{
+								<span class="badge bg-danger">END</span>
+							}
+							else
+							{
+								<span class="badge bg-primary">UPCOMING</span>
+							}
+						</p>
+						<p class="card-text">
+							<b>Actors:</b>
+							<div class="d-flex flex-row">
+								@foreach (var item in Model.ActorsMovies)
+								{
+									<div class="d-flex flex-column" style="margin:5px">
+										<div>
+											<img src="@item.Actor.ProfilePictureURL" width="150px" height="150px" style="border-radius:50%" alt="@item.Actor.FullName">
+										</div>
+										<div class="text-center">
+											<h4>
+												@item.Actor.FullName
+											</h4>
+
+										</div>
+
+									</div>
+
+								}
+							</div>
+
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer d-flex justify-content-between">
+				<a asp-action="Index" asp-controller="Movies" class="btn btn-outline-primary "> <i class="bi bi-list"></i> Back to List</a>
+				<a href="#" class="btn btn-success text-white"> <i class="bi bi-eye-fill"></i> Add to Cart ($@Model.Price)</a>
+
+			</div>
+		</div>
+	</div>
+}
+else
+{
+	<div class="alert alert-danger text-center" role="alert">
+		<h2>
+			Movie not found
+		</h2>
+	</div>
+}
