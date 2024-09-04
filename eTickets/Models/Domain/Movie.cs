@@ -25,5 +25,6 @@ namespace eTickets.Models.Domain
         public Producer Producer { get; set; }
         //cinema
         public ICollection<Cinema_Movie> CinemasMovies { get; set; }
+        
     }
 }

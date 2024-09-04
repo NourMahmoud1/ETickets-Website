@@ -1,11 +1,11 @@
-﻿@model eTickets.Models.View.EditActorRequest
+﻿@model eTickets.Models.View.EditCinemaRequest
 @{
-    ViewData["Title"] = "Edit Actor";
+    ViewData["Title"] = "Edit Cinema";
 }
 
 <div class="bg-secondary bg-opacity-10 py-2">
     <div class="container">
-        <h1>Welcome Admin, Edit an existing Actor</h1>
+        <h1>Welcome Admin, Edit an existing Cinema</h1>
     </div>
 </div>
 
@@ -19,31 +19,33 @@
                 <input type="text" class="form-control" id="id" asp-for="Id" readonly />
             </div>
             <div class="mb-3">
-                <label class="form-label">Full Name</label>
-                <input type="text" class="form-control" id="fullName" asp-for="FullName" />
-                <span asp-validation-for="FullName" class="text-danger"></span>
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" id="Name" asp-for="Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
 
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Bio</label>
-                <textarea class="form-control" id="bio" asp-for="Bio"></textarea>
-                <span asp-validation-for="Bio" class="text-danger"></span>
+                <label class="form-label">Description</label>
+                <textarea class="form-control" id="description" asp-for="Description"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Featured Image Upload</label>
                 <input type="file" class="form-control" id="featuredImageUpload" />
-                @if (Model.ProfilePictureURL != null)
+                @if (Model.Logo != null)
                 {
-                    <img src="@Model.ProfilePictureURL" id="featuredImageDisplay" style="display:block;margin-top:5px;width:200px;height:200px" />
+                    <img src="@Model.Logo" id="featuredImageDisplay" style="display:block;margin-top:5px;width:200px;height:200px" />
                 }
                 <img src="" id="featuredImageDisplay" style="display:none;width:200px" />
             </div>
             <div class="mb-3">
                 <label class="form-label">Featured Image URL</label>
-                <input type="text" class="form-control" id="featuredImageUrl" asp-for="ProfilePictureURL" />
-                <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
+                <input type="text" class="form-control" id="featuredImageUrl" asp-for="Logo" />
+                <span asp-validation-for="Logo" class="text-danger"></span>
+
             </div>
 
 
@@ -52,7 +54,7 @@
                     Update
                 </button>
                 <button type="submit" class="btn btn-danger ms-3"
-                        asp-area="" asp-controller="Actors" asp-action="Delete">
+                        asp-area="" asp-controller="Cinemas" asp-action="Delete">
                     Delete
                 </button>
             </div>
@@ -62,14 +64,14 @@
     else
     {
         <div class="alert alert-danger" role="alert">
-            Actor not found
+            Cinema not found
         </div>
     }
 </div>
 
 @section Scripts {
     <script>
-        var editor = new FroalaEditor('#bio', {
+        var editor = new FroalaEditor('#description', {
             imageUploadURL: '/api/images',
         });
         const featuredUploadElement = document.getElementById('featuredImageUpload');
@@ -97,12 +99,5 @@
 
         featuredUploadElement.addEventListener('change', uploadFeaturedImage);
     </script>
-    <script>
-        var isEdited = @ViewBag.IsEdited;
-        if (isEdited) {
-            alert("Actor has been edited.");
-        } else {
-            alert("Actor has not been edited.");
-        }
-    </script>
+
 }

@@ -7,9 +7,9 @@ namespace eTickets.Repositories
 		Task<IEnumerable<Producer>> GetProducersAsync();
 		Task AddAsync(Producer producer);
 		Task<Producer> GetProducerByIdAsync(Guid id);
-        //update actor
+        //update Producer
         Task<Producer?> UpdateAsync(Producer producer);
-        //delete actor
+        //delete producer
         Task<Producer?> DeleteAsync(Guid id);
     }
 }

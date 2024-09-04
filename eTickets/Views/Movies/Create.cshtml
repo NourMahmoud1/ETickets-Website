@@ -1,0 +1,98 @@
+﻿@model eTickets.Models.View.AddMovieRequest
+@{
+}
+<p>
+    <h1>Add New Movie</h1>
+</p>
+
+<div class="container py-5">
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" asp-for="Name" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" id="description" asp-for="Description"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Start Date</label>
+            <input type="date" class="form-control" id="startDate" asp-for="StartDate" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">End Date</label>
+            <input type="date" class="form-control" id="endDate" asp-for="EndDate" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Price</label>
+            <input type="number" class="form-control" id="price" asp-for="Price" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Featured Image Upload</label>
+            <input type="file" class="form-control" id="featuredImageUpload" />
+            <img src="" id="featuredImageDisplay" style="display:none;width:200px" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Featured Image URL</label>
+            <input type="text" class="form-control" id="featuredImageUrl" asp-for="ImageURL" />
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Movie Actors</label>
+            <select class="form-select" asp-items="@Model.Actors" asp-for="SelectedActors"></select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ciname Name</label>
+            <select class="form-select" asp-items="@Model.Cinemas" asp-for="SelectedCinemas"></select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Movie Category</label>
+            <select class="form-select" asp-items="Model.Categories" asp-for="MovieCategory"></select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Movie Producer</label>
+            <select class="form-select" asp-items="Model.Producers" asp-for="SelectedProducer"></select>
+        </div>
+        
+        <div class="mb-3">
+            <button type="submit" class="btn btn-dark">
+                Add
+            </button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        var editor = new FroalaEditor('#description', {
+            imageUploadURL: '/api/images',
+        });
+
+
+        const featuredUploadElement = document.getElementById('featuredImageUpload');
+        const featuredImageUrlElement = document.getElementById('featuredImageUrl');
+        const featuredImageDisplayElement = document.getElementById('featuredImageDisplay')
+
+        async function uploadFeaturedImage(e) {
+            console.log(e.target.files[0]);
+            let data = new FormData();
+            data.append('file', e.target.files[0]);
+
+            await fetch('/api/images', {
+                method: 'POST',
+                headers: {
+                    'Accept': '*/*',
+                },
+                body: data
+            }).then(response => response.json())
+                .then(result => {
+                    featuredImageUrlElement.value = result.link;
+                    featuredImageDisplayElement.src = result.link;
+                    featuredImageDisplayElement.style.display = 'block';
+                });
+        }
+
+        featuredUploadElement.addEventListener('change', uploadFeaturedImage);
+    </script>
+}

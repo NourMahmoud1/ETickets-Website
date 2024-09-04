@@ -32,6 +32,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.AddScoped<IActorsRepository, ActorsRepository>();
 builder.Services.AddScoped<IProducersRepository, ProducersRepository>();
 builder.Services.AddScoped<ICinemasRepository, CinemasRepository>();
+builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
 builder.Services.AddScoped<IImageRepository, CloudinaryImageRepository>();
 
 var app = builder.Build();

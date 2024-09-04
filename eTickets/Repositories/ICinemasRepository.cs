@@ -8,6 +8,8 @@ namespace eTickets.Repositories
 
 		Task AddAsync(Cinema cinema);
 		Task<Cinema> GetCinemaByIdAsync(Guid id);
-
+		Task<Cinema?> UpdateAsync(Cinema cinema);
+		//delete cinema
+		Task<Cinema?> DeleteAsync(Guid id);
 	}
 }

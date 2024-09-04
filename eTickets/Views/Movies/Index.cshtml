@@ -36,7 +36,7 @@
 									<img class="card-img-top rounded" src="@movie.ImageURL" alt="@movie.Name" style="height:95%;width:100%;margin:10px auto">
 								</div>
 								<div class="card-body col-6">
-									<p class="card-text truncate-2-lines">@movie.Description</p>
+									<p class="card-text truncate-2-lines"> <span class="truncate-2-lines">@Html.Raw(movie.Description)</p>
 									<p class="card-text">
 										<b>Cinema</b>
 										<ul>
@@ -77,7 +77,11 @@
 	}
 
 </div>
-
+<div style="position:fixed;bottom:1em;right:1em" class="text-white">
+	<a asp-action="Create" asp-controller="Movies" class="btn btn-success">
+		<i class="bi bi-plus-circle"></i> Add New
+	</a>
+</div>
 <script>
 	$(document).ready(function () {
 		$(".card-shadow").hover(
