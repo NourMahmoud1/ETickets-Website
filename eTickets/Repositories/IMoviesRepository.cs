@@ -13,6 +13,7 @@ namespace eTickets.Repositories
         //delete Movie
         Task<Movie?> DeleteAsync(Guid id);
         Task<IEnumerable<Producer>> GetProducersAsync();
-
+        //search move
+        Task<IEnumerable<Movie>> SearchMoviesAsync(string searchString);
     }
 }

@@ -53,27 +53,31 @@
 								<span class="badge bg-primary">UPCOMING</span>
 							}
 						</p>
+						
 						<p class="card-text">
 							<b>Actors:</b>
-							<div class="d-flex flex-row">
+							<div class="row">
 								@foreach (var item in Model.ActorsMovies)
 								{
-									<div class="d-flex flex-column" style="margin:5px">
-										<div>
-											<img src="@item.Actor.ProfilePictureURL" width="150px" height="150px" style="border-radius:50%" alt="@item.Actor.FullName">
+									<div class="col-md-4 col-sm-4" style="margin-bottom: 20px;">
+										<div class="d-flex flex-column align-items-center" >
+											<div>
+												<img src="@item.Actor.ProfilePictureURL" width="100px" height="100px" style="border-radius:50%; margin-bottom: 10px;" alt="@item.Actor.FullName">
+											</div>
+											<div class="text-center">
+												<h5>@item.Actor.FullName</h5>
+											</div>
 										</div>
-										<div class="text-center">
-											<h4>
-												@item.Actor.FullName
-											</h4>
-
-										</div>
-
 									</div>
-
 								}
 							</div>
-
+						</p>
+						<p class="card-text">
+							<b>Producer:</b>
+							<div>
+								<img src="@Model.Producer.ProfilePictureURL" width="100px" height="100px" style="border-radius:50%;" alt="@Model.Producer.FullName">
+								<h5>@Model.Producer.FullName</h5>
+							</div>
 						</p>
 					</div>
 				</div>

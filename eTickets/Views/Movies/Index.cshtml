@@ -26,7 +26,7 @@
 						<div class="card-header txt-white bg-info">
 							<div class="card-text d-flex justify-content-between">
 								<h5 class="card-title text-white fw-bold">@movie.Name</h5>
-								<a class=" card-title " href="#"><i class="bg bi-pencil-square text-white "></i></a>
+								<a class=" card-title " asp-controller="Movies" asp-action="Edit" asp-route-id="@movie.Id"><i class="bg bi-pencil-square text-white "></i></a>
 							</div>
 						</div>
 						<div class="container">
